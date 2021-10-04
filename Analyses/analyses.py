@@ -8,6 +8,7 @@ import logging
 from requests.api import request
 from requests.models import requote_uri
 
+
 class API_Error(Exception):
     def __init__(self, message) -> None:
         self.message = message
@@ -31,6 +32,7 @@ def response_handler(response):
         message = "Error " + str(code) + ": " + str(error_message)
         raise API_Error(message)
     return 0
+
 
 class Analysis:
     def __init__(self, baseURL):

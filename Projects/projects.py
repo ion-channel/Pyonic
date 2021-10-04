@@ -8,6 +8,7 @@ import logging
 from requests.api import request
 from requests.models import requote_uri
 
+
 class API_Error(Exception):
     def __init__(self, message) -> None:
         self.message = message
@@ -31,6 +32,7 @@ def response_handler(response):
         message = "Error " + str(code) + ": " + str(error_message)
         raise API_Error(message)
     return 0
+
 
 class Project:
     def __init__(self, baseURL):
@@ -188,7 +190,6 @@ class Project:
         logging.debug(f"Status Code: {r.status_code}")
         dictionary_data = json.loads(r.content)
         return dictionary_data
-
 
     # This endpoint will update a project and its contents based on the values within the JSON project parameter,
     # also handles the nauture of the project - whether it should be archived or not, add "active" setting (boolean) to JSON
