@@ -72,6 +72,28 @@ class Report:
         dictionary_data = json.loads(r.content)
         return dictionary_data
 
+    def get_SBOMs(self, organizationid, status):
+        """
+        Will get content for a set of SBOMs within an organization
+
+        :param organizationid: (String) This is the organization id for the organization that SBOMs will be retrieved for
+        :param status: (String) This is the status of the organization
+        :return: (Dictionary) or (Integer) Will return a dictionary object with a set of SBOMs from the API, if errored will return -1 or throw an Exception
+        """
+        endpoint = "project/getSBOMs"
+        head = {"Authorization": "Bearer " + self.token}
+        URL = self.baseURL + endpoint
+        parameters = {"org_id": organizationid, "status": status}
+        logging.debug(f"Http Destination: {URL}")
+        r = requests.post(URL, headers=head, params=parameters)
+        logging.debug(f"Request Type: {r.request}")
+        logging.debug(f"Status Code: {r.status_code}")
+        check = response_handler(r)
+        if check != 0:
+            return -1
+        dictionary_data = json.loads(r.content)
+        return dictionary_data
+
     # This endpoint will return project data from the API when passed a teamid and projectid
     def get_project_report(self, teamid, projectid):
         """
