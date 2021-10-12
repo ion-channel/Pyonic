@@ -225,3 +225,24 @@ class Vulnerability:
             return -1
         dictionary_data = json.loads(r.content)
         return dictionary_data
+
+    def add_vulnerability(self, vulnerabilityInput):
+        """
+        Will add a vulnerability to a set of vulnerabilities within the API
+
+        :param vulnerabilityInput: (Dictionary) This is the vulnerability object that will be parsed an added to a set of vulnerabilities within the API
+        :return: (Dictionary) or (Integer) Will return a dictionary object with the added vulnerability data retrieved from the API, if errored will return -1 or throw an Exception
+        """
+        endpoint = "internal/vulnerability/addVulnerability"
+        head = {"Authorization": "Bearer " + self.token}
+        URL = self.baseURL + endpoint
+        json_data = vulnerabilityInput
+        logging.debug(f"Http Destination: {URL}")
+        r = requests.post(URL, headers=head, data=json_data)
+        logging.debug(f"Request Type: {r.request}")
+        logging.debug(f"Status Code: {r.status_code}")
+        check = response_handler(r)
+        if check != 0:
+            return -1
+        dictionary_data = json.loads(r.content)
+        return dictionary_data

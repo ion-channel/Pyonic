@@ -114,13 +114,23 @@ class Dependency:
         :param ecosystem: (String) This is the dependency ecosystem for the file
         :return: (Dictionary) or (Integer) Will return a dictionary object with resolved/identified dependencies in file retrieved from the API, if errored will return -1 or throw an Exception
         """
-        endpoint = (
-            "dependency/resolveDependenciesInFile?"
-            + "Flatten="
-            + str(flatten)
-            + "&type="
-            + str(ecosystem)
-        )
+        f = open(file)
+        if f.name == "Gemfile.lock.lock":
+            endpoint = (
+                "dependency/resolveFromFile?"
+                + "Flatten="
+                + str(flatten)
+                + "&type="
+                + str(ecosystem)
+            )
+        else:
+            endpoint = (
+                "dependency/resolveDependenciesInFile?"
+                + "Flatten="
+                + str(flatten)
+                + "&type="
+                + str(ecosystem)
+            )
         head = {"Authorization": "Bearer " + self.token}
         URL = self.baseURL + endpoint
         # json_data = {"file": file}

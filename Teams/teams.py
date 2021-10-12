@@ -152,6 +152,28 @@ class Team:
         dictionary_data = json.loads(r.content)
         return dictionary_data
 
+    def get_team_user(self, teamid, userid):
+        """
+        Will get a team user from a specified team
+
+        :param teamid: (String) This is the team id for the team that user data will be retrieved for
+        :param userid: (String) This is the user id for the user that team data will be retrieved for
+        :return: (Dictionary) or (Integer) Will return a dictionary object containing team user data retrieved from the API, if errored will return -1 or throw an Exception
+        """
+        endpoint = "teamUsers/getTeamUser"
+        head = {"Authorization": "Bearer " + self.token}
+        URL = self.baseURL + endpoint
+        parameters = {"team_id": teamid, "user_id": userid}
+        logging.debug(f"Http Destination: {URL}")
+        r = requests.get(URL, headers=head, params=parameters)
+        logging.debug(f"Request Type: {r.request}")
+        logging.debug(f"Status Code: {r.status_code}")
+        check = response_handler(r)
+        if check != 0:
+            return -1
+        dictionary_data = json.loads(r.content)
+        return dictionary_data
+
     # This endpoint will return an array of users that are on a team
     # when inputted with the corresponding teamid
     def get_team_users(self, teamid):
