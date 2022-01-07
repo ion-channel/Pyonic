@@ -24,6 +24,7 @@ def test_get_product_versions():
     version = "11.0"
     t_status = ion_client.get_product_versions(name, version)
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert ("id" in t_status["data"][0]) == True
     assert ("name" in t_status["data"][0]) == True
     assert ("org" in t_status["data"][0]) == True
@@ -68,6 +69,7 @@ def test_get_product_search():
     searchInput = "(bundler)AND1.17.3"
     t_status = ion_client.get_product_search(searchInput)
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert ("id" in t_status["data"][0]) == True
     assert ("name" in t_status["data"][0]) == True
     assert ("org" in t_status["data"][0]) == True
@@ -118,6 +120,7 @@ def test_get_raw_product():
     product_name = "go"
     t_status = json.loads(ion_client.get_raw_product(product_name))
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert ("id" in t_status["data"][0]) == True
     assert ("name" in t_status["data"][0]) == True
     assert ("org" in t_status["data"][0]) == True
@@ -168,6 +171,7 @@ def test_get_product():
     product_name = "go"
     t_status = ion_client.get_product(product_name)
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert ("id" in t_status["data"][0]) == True
     assert ("name" in t_status["data"][0]) == True
     assert ("org" in t_status["data"][0]) == True

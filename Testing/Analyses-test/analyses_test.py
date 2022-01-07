@@ -33,6 +33,7 @@ def test_analysis_status():
     assert t_status["data"]["project_id"] == project_id
     assert ("status" in t_status["data"]) == True
     assert ("scan_status" in t_status["data"]) == True
+    assert len(t_status["data"]["scan_status"]) > 0
     assert t_status["data"]["scan_status"][0]["analysis_status_id"] == analyses_id
     assert t_status["data"]["scan_status"][0]["project_id"] == project_id
     assert t_status["data"]["scan_status"][0]["team_id"] == team_id
@@ -86,7 +87,7 @@ def test_get_latest_analysis_status():
     assert t_status["data"]["project_id"] == project_id
     assert ("status" in t_status["data"]) == True
     assert ("scan_status" in t_status["data"]) == True
-    assert t_status["data"]["scan_status"][0]["project_id"] == project_id
+    assert len(t_status["data"]["scan_status"]) > 0
     assert t_status["data"]["scan_status"][0]["team_id"] == team_id
 
 
@@ -130,6 +131,7 @@ def test_get_analyses():
     project_id = "90360692-dfec-46ac-8248-a8be96a48ee3"
     t_status = ion_client.get_analyses(team_id, project_id)
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert ("id" in t_status["data"][0]) == True
     assert ("team_id" in t_status["data"][0]) == True
     assert ("project_id" in t_status["data"][0]) == True
@@ -184,6 +186,7 @@ def test_get_latest_analysis_statuses():
     team_id = "646fa3e5-e274-4884-aef2-1d47f029c289"
     t_status = ion_client.get_latest_analysis_statuses(team_id)
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert ("id" in t_status["data"][0]) == True
     assert ("team_id" in t_status["data"][0]) == True
     assert ("project_id" in t_status["data"][0]) == True
@@ -198,6 +201,7 @@ def test_get_raw_analyses():
     project_id = "90360692-dfec-46ac-8248-a8be96a48ee3"
     t_status = json.loads(ion_client.get_raw_analyses(team_id, project_id))
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert ("id" in t_status["data"][0]) == True
     assert ("team_id" in t_status["data"][0]) == True
     assert ("project_id" in t_status["data"][0]) == True
@@ -258,6 +262,7 @@ def test_get_latest_analysis_summaries():
     ]
     t_status = ion_client.get_latest_analysis_summaries(team_id, project_ids)
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert ("id" in t_status["data"][0]) == True
     assert ("analysis_id" in t_status["data"][0]) == True
     assert ("team_id" in t_status["data"][0]) == True
@@ -351,6 +356,7 @@ def test_get_analyses_statuses():
     analysis_ids = ["bf556a9e-e292-4aa9-a0c4-2b4785a66375"]
     t_status = ion_client.get_analyses_statuses(team_id, analysis_ids)
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert t_status["data"][0]["analysis_id"] == analysis_ids[0]
     assert ("project_id" in t_status["data"][0]) == True
     assert t_status["data"][0]["status"] == "fail"
@@ -405,6 +411,7 @@ def test_analyze_projects():
     t_status = ion_client.analyze_projects(project_ids)
     assert ("data" in t_status) == True
     assert ("succeeded" in t_status["data"]) == True
+    assert len(t_status["data"]["succeeded"]) > 0
     assert (
         t_status["data"]["succeeded"][0]["team_id"]
         == "646fa3e5-e274-4884-aef2-1d47f029c289"
@@ -446,6 +453,7 @@ def test_get_analyses_vulnerability_export_data():
     ]
     t_status = ion_client.get_analyses_vulnerability_export_data(team_id, analysis_ids)
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert ("title" in t_status["data"][0]) == True
     assert ("external_id" in t_status["data"][0]) == True
     assert ("severity" in t_status["data"][0]) == True

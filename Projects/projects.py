@@ -388,7 +388,7 @@ class Project:
         """
         Will get portfolio information for affected projects within a specified team
 
-        :param ids: (String Array) This array takes in two values, at index 0 is the teamid, and at index 1 is the respective project id
+        :param ids: (String Array) This array takes in a set of project ids
         :return: (Dictionary) or (Integer) Will return a dictionary object with portfolio of affected projects retrieved from the API, if errored will return -1 or throw an Exception
         """
         endpoint = "project/getAffectedProjectsInfo"
