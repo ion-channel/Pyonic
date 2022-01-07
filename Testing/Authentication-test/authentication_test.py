@@ -21,6 +21,7 @@ def test_login():
 def test_get_tokens():
     t_status = ion_client.get_tokens()
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert ("id" in t_status["data"][0]) == True
     assert ("created_at" in t_status["data"][0]) == True
     assert ("updated_at" in t_status["data"][0]) == True

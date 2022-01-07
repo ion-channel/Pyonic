@@ -24,6 +24,7 @@ def test_get_versions_for_dependency():
     ecosystem = "Ruby"
     t_status = ion_client.get_versions_for_dependency(package_name, ecosystem)
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert ("name" in t_status["data"][0]) == True
     assert ("version" in t_status["data"][0]) == True
     assert ("latest_version" in t_status["data"][0]) == True
@@ -66,6 +67,7 @@ def test_search_dependencies():
     org = "bundler"
     t_status = ion_client.search_dependencies(org)
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert ("name" in t_status["data"][0]) == True
     assert ("version" in t_status["data"][0]) == True
     assert ("latest_version" in t_status["data"][0]) == True
@@ -132,6 +134,7 @@ def test_get_raw_dependency_list():
     t_status = json.loads(ion_client.get_raw_dependency_list(project_ids))
     assert ("data" in t_status) == True
     assert "dependency_list" in t_status["data"]
+    assert len(t_status["data"]["dependency_list"]) > 0
     assert "latest_version" in t_status["data"]["dependency_list"][0]
     assert "org" in t_status["data"]["dependency_list"][0]
     assert "name" in t_status["data"]["dependency_list"][0]
@@ -175,6 +178,7 @@ def test_get_dependency_list():
     t_status = ion_client.get_dependency_list(project_ids)
     assert ("data" in t_status) == True
     assert "dependency_list" in t_status["data"]
+    assert len(t_status["data"]["dependency_list"]) > 0
     assert "latest_version" in t_status["data"]["dependency_list"][0]
     assert "org" in t_status["data"]["dependency_list"][0]
     assert "name" in t_status["data"]["dependency_list"][0]

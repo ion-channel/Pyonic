@@ -23,6 +23,7 @@ def test_get_delivery_destinations():
     team_id = "646fa3e5-e274-4884-aef2-1d47f029c289"
     t_status = ion_client.get_delivery_destinations(team_id)
     assert ("data" in t_status) == True
+    assert len(t_status["data"]) > 0
     assert ("id" in t_status["data"][0]) == True
     assert ("team_id" in t_status["data"][0]) == True
     assert ("location" in t_status["data"][0]) == True
