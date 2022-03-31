@@ -1,13 +1,6 @@
 name: Black
 
-on:
-
-  push:
-    branches:
-      - main
-      - master
-
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   black:
