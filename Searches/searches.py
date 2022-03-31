@@ -79,3 +79,44 @@ class Search:
             return -1
         dictionary_data = json.loads(r.content)
         return dictionary_data
+
+    # This endpoint performs a search based on a series of parameters
+    # "query" parameter is required is the text that the search will be applied upon.
+    # "tbs" parameter is optional and indicates that the search will query for repositories.
+    # "offset" parameter is optional and is for pagination purposes, it indicates at what
+    # record to begin returning results on.
+    # "limit" parameter is optional and describes the number of records to return for
+    # pagination purposes.
+    def test_search(self, query, tbs=None, offset=None, limit=None):
+        """
+        Will perform a search based on a series of specified parameters
+
+        :param query: (String) This is the text that the search will be applied on
+        :param tbs: (String) Optional parameter that indicates that the search will also query for repositories
+        :param offset: (Integer) Optional parameter that is for pagination purposes, indicates at what record to begin retrieving results
+        :param limit: (Integer) Optional parameter that describes the number of records to have retrieved
+        :return: (Dictionary) or (Integer) Will return a dictionary object containing search results retrieved from the API, if errored will return -1 or throw an Exception
+        """
+        endpoint = "search"
+        head = {"Authorization": "Bearer " + self.token}
+        URL = self.baseURL + endpoint
+        parameters = {"q": query}
+
+        if tbs is not None:
+            parameters["tbs"] = tbs
+
+        if offset is not None:
+            parameters["offset"] = offset
+
+        if limit is not None:
+            parameters["limit"] = limit
+
+        logging.debug(f"Http Destination: {URL}")
+        r = requests.get(URL, headers=head, params=parameters)
+        logging.debug(f"Request Type: {r.request}")
+        logging.debug(f"Status Code: {r.status_code}")
+        check = response_handler(r)
+        if check != 0:
+            return -1
+        dictionary_data = json.loads(r.content)
+        return dictionary_data
