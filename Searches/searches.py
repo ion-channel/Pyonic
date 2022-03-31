@@ -92,13 +92,13 @@ class Search:
         :return: (Dictionary) or (Integer) Will return a dictionary object containing score results retrieved from the API, if errored will return -1 or throw an Exception
         """
         endpoint = "score/getScore?purl=pkg:"
-        if tb == 'repos':
-            pkg_type = 'github'
-        elif tb == 'products':
-            pkg_type = 'TBA'
-        elif tb == 'packages':
-            pkg_type = 'TBA'
-        query = '/' + org + '/' + name
+        if tb == "repos":
+            pkg_type = "github"
+        elif tb == "products":
+            pkg_type = "TBA"
+        elif tb == "packages":
+            pkg_type = "TBA"
+        query = "/" + org + "/" + name
         head = {"Authorization": "Bearer " + self.token}
         URL = self.baseURL + endpoint + pkg_type + query
         logging.debug(f"Http Destination: {URL}")
