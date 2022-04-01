@@ -65,34 +65,3 @@ class Secret:
         dictionary_data = json.loads(r.content)
         return dictionary_data
 
-    # This endpoint returns a risk score for scope, category, and attributes based on a series of specified parameters
-    # Uses purl spec https://github.com/package-url/purl-spec#purl
-    def get_score(self, name, org, pkg_type, tb=None):
-        """
-        Will perform a search for a risk score based on a series of specified parameters
-        Uses purl spec https://github.com/package-url/purl-spec#purl
-        :param name: (String) The name of the package. Required.
-        :param org: (String) Some name prefix such as a Maven groupid, a Docker image owner, a GitHub user or organization. Optional and type-specific.
-        :param pkg_type: (String) The package "type" or package "protocol" such as maven, npm, nuget, gem, pypi, github, etc. Required.
-        :param tb: (String) Optional parameter that indicates what package type is set.
-        :return: (Dictionary) or (Integer) Will return a dictionary object containing score results retrieved from the API, if errored will return -1 or throw an Exception
-        """
-        endpoint = "score/getScore?purl=pkg:"
-        if tb == "repos":
-            pkg_type = "github"
-        elif tb == "products":
-            pkg_type = "TBA"
-        elif tb == "packages":
-            pkg_type = "TBA"
-        query = "/" + org + "/" + name
-        head = {"Authorization": "Bearer " + self.token}
-        URL = self.baseURL + endpoint + pkg_type + query
-        logging.debug(f"Http Destination: {URL}")
-        r = requests.get(URL, headers=head)
-        logging.debug(f"Request Type: {r.request}")
-        logging.debug(f"Status Code: {r.status_code}")
-        check = response_handler(r)
-        if check != 0:
-            return -1
-        dictionary_data = json.loads(r.content)
-        return dictionary_data
