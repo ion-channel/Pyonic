@@ -84,8 +84,8 @@ class Search:
     # Uses purl spec https://github.com/package-url/purl-spec#purl
     def get_score(self, name, org, pkg_type, tb=None):
         """
-        Will perform a search for a risk score based on a series of specified parameters
-        Uses purl spec https://github.com/package-url/purl-spec#purl
+        Will perform a search for a risk score based on a series of specified parameters. Uses purl spec https://github.com/package-url/purl-spec#purl
+
         :param name: (String) The name of the package. Required.
         :param org: (String) Some name prefix such as a Maven groupid, a Docker image owner, a GitHub user or organization. Optional and type-specific.
         :param pkg_type: (String) The package "type" or package "protocol" such as maven, npm, nuget, gem, pypi, github, etc. Required.
